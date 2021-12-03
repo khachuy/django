@@ -304,6 +304,6 @@ Run server:
 ```shell script
 python manage.py runserver
 ```
-Access to [here](localhost:8080/user/insert) to insert member dummy.
+Access to [here](http://localhost:8080/user/insert) to insert member dummy.
 
-Access to [here](localhost:8080/user) to get member dummy.
+Access to [here](http://localhost:8080/user) to get member dummy.
