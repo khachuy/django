@@ -307,3 +307,70 @@ python manage.py runserver
 Access to [here](http://localhost:8080/user/insert) to insert member dummy.
 
 Access to [here](http://localhost:8080/user) to get member dummy.
+
+
+# Admin Interface
+Django provides a default admin interface which can be used to perform create, read, update and delete operations on the model directly. It reads set of data that explain and gives information about data from the model, to provide an instant interface where the user can adjust contents of the application . This is an in-built module and design to execute admin related work to the user.
+
+The admin app(django.contrib.admin) is enabled by default and already added into the INSTALLED_APPS list present in the settings.py file.
+
+## Create superuser
+```shell script
+python manage.py createsuperuser
+```
+* Input username, email, password to create superuser.
+
+## Register Models to Admin
+In app, update admin.py as below:
+```pydocstring
+from django.contrib import admin
+
+from .models import Member, Address, Vehicle
+
+
+class MemberAdmin(admin.ModelAdmin):
+    # fields of member
+    list_display = ['first_name', 'last_name', 'sex', 'date_of_birth', 'address', 'create_date', 'vehicle']
+    # fields will use to filter
+    list_filter = ['first_name', 'sex', 'address', 'create_date', 'vehicle']
+    # fields will use to search
+    search_fields = ['first_name', 'sex', 'address', 'create_date', 'vehicle']
+
+
+class AddressAdmin(admin.ModelAdmin):
+    # fields of member
+    list_display = ['address', 'district']
+    # fields will use to filter
+    list_filter = ['address', 'district']
+    # fields will use to search
+    search_fields = ['address', 'district']
+
+
+class VehicleAdmin(admin.ModelAdmin):
+    # fields of member
+    list_display = ['vehicle_type', 'vehicle_id']
+    # fields will use to filter
+    list_filter = ['vehicle_type', 'vehicle_id']
+    # fields will use to search
+    search_fields = ['vehicle_type', 'vehicle_id']
+
+
+# Register your models here.
+admin.site.register(Member, MemberAdmin)
+admin.site.register(Address, AddressAdmin)
+admin.site.register(Vehicle, VehicleAdmin)
+```
+
+## Access to the Admin page
+Access /admin to the Admin page.
+Example:
+Start project 
+```
+python manage.py runserver
+```
+
+Login with account superuser.
+
+Access [here](http://localhost:8080/admin) to the Admin page.
+
+In page will show table of Member, Address, Vehicle.
